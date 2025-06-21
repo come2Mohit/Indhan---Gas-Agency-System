@@ -1,0 +1,204 @@
+/* Base styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
+
+body {
+	background-image: url("../images/25610.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #333;
+	min-height: 100vh;
+	padding: 1rem;
+}
+
+/* Header */
+header {
+	/* background-image: url("../images/25610.jpg"); */
+	background-position: center;
+	background-size: cover;
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	padding: 15px 30px;
+}
+
+.navlogo {
+	display: flex;
+	align-items: center;
+}
+
+.logo img {
+	height: 50px;
+	margin-right: 10px;
+}
+
+.companyname p {
+	font-size: 2.2rem;
+	font-weight: bold;
+	background: linear-gradient(to right, rgb(255, 92, 92), #0032ff);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	color: transparent;
+	display: inline-block;
+}
+
+.firsthr {
+	color: #007bff;
+	height: 3px;
+	border: none;
+	border-top: 3px solid #007bff;
+	margin: 0 30px;
+}
+
+/* Back Button */
+.back-button {
+	padding: 20px 0px;
+}
+
+.back-button button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 8px 16px;
+	font-size: 14px;
+	border-radius: 6px;
+	cursor: pointer;
+}
+
+.back-button button:hover {
+	background-color: #0056b3;
+}
+
+/* Form Container */
+.container {
+	width: 100%;
+	max-width: 400px;
+	background-color: white;
+	margin: 30px auto;
+	padding: 25px 30px;
+	border-radius: 10px;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+	text-align: center;
+	font-size: 26px;
+	font-weight: 600;
+	margin-bottom: 25px;
+}
+
+form .form-group {
+	margin-bottom: 20px;
+	flex: 1;
+}
+
+label {
+	display: block;
+	margin-bottom: 6px;
+	font-weight: 500;
+	font-size: 15px;
+}
+
+input[type="email"],
+input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	font-size: 14px;
+}
+
+input:focus {
+	border-color: #007bff;
+	outline: none;
+}
+
+/* Form Rows */
+.form-row {
+	display: flex;
+	flex-direction: column;
+}
+
+.full-width {
+	width: 100%;
+}
+
+/* Forgot Password */
+.forgot-password {
+	text-align: right;
+	margin-top: -10px;
+	margin-bottom: 15px;
+}
+
+.forgot-password a {
+	color: #007bff;
+	text-decoration: none;
+	font-size: 13px;
+}
+
+.forgot-password a:hover {
+	text-decoration: underline;
+}
+
+/* Button */
+button[type="submit"] {
+	width: 100%;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 12px;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.3s ease;
+}
+
+button[type="submit"]:hover {
+	background-color: #0056b3;
+}
+
+/* Register Link */
+.register-link {
+	display: flex;
+	justify-content: center;
+	font-size: 0.9rem;
+	gap: 1rem;
+	text-align: center;
+	margin-top: 15px;
+	font-size: 14px;
+	color: #333;
+}
+
+.register-link a {
+	color: #007bff;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+.register-link a:hover {
+	text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+	.container {
+		padding: 20px;
+	}
+
+	.title {
+		font-size: 22px;
+	}
+
+	button[type="submit"] {
+		font-size: 15px;
+	}
+}

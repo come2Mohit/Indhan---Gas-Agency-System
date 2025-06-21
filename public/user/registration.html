@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration</title>
+    <link rel="stylesheet" href="../../scr/css/registration.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="navlogo">
+                <div class="logo"><img src="../../scr/images/Adobe Express - file.png" alt="Logo"></div>
+                <div class="companyname">
+                    <p>Indhan</p>
+                </div>
+            </div>
+        </nav>
+        <hr class="firsthr" />
+    </header>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <button onclick="history.back()">← Back</button>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="container">
+        <div class="title">Registration</div>
+        <form action="#">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your name" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Enter your number" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm your password" required />
+                </div>
+                <div class="form-group gender">
+                    <label>Gender</label>
+                    <div class="gender-options">
+                        <label><input type="radio" name="gender" value="male" required> Male</label>
+                        <label><input type="radio" name="gender" value="female"> Female</label>
+                        <label><input type="radio" name="gender" value="none"> Prefer not to say</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <!-- <script src="js/user-registration.js"></script> -->
+    <script type="module" src="../../scr/js/user/user-registration.js"></script>
+
+
+</body>
+
+</html>

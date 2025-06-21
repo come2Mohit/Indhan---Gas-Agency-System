@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="../../scr/css/login.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="custom-alert" style="
+        display:none;
+        background: #f44336;
+        color: white;
+        padding: 10px 20px;
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        z-index: 1000;
+        font-family: sans-serif;
+    "></div>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="navlogo">
+                <div class="logo"><img src="../../scr/images/Adobe Express - file.png" alt="Logo" /></div>
+                <div class="companyname">
+                    <p>Indhan</p>
+                </div>
+            </div>
+        </nav>
+        <hr class="firsthr" />
+    </header>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <button onclick="window.location.href='../index.html'">← Back</button>
+    </div>
+
+    <!-- Login Form -->
+    <div class="container">
+        <div class="title">Admin Login</div>
+        <form action="#">
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter your email" required />
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required />
+                </div>
+            </div>
+
+            <div class="form-row forgot-password">
+                <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+
+            <div class="form-group full-width">
+                <button type="submit">Login</button>
+            </div>
+
+        </form>
+    </div>
+
+
+
+    <script type="module" src="../../scr/js/admin/admin-login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-bold-straight/css/uicons-bold-straight.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-chubby/css/uicons-regular-chubby.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-straight/css/uicons-solid-straight.css'>
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../scr/css/admin-dashboard.css">
+
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <nav>
+        <div class="logo">
+            <img src="./../../scr/images/Adobe Express - file.png" alt="Logo">
+            <span>Indhan</span>
+        </div>
+
+        <!-- <div class="menu">
+            ADMIN PANEL
+        </div> -->
+        <div class="nav-center">
+            <div class="nav-icons">
+                <i data-target="container" class="fa-solid fa-house active"></i>
+                <i data-target="client-request" class="fa-solid fa-file-circle-check"></i>
+                <!-- <i data-target="" class="fa-solid fa-envelope"></i> -->
+                <!-- <i data-target="" class="fa-solid fa-file-alt"></i> -->
+                <i data-target="all-members" class="fa-solid fa-users"></i>
+                <i data-target="new-admin" class="fa-solid fa-user-plus"></i>
+            </div>
+            <div class="which-panel">ADMIN PANEL</div>
+            <div class="search-box" id="searchBox">
+                <input type="text" placeholder="Search..." id="searchInput">
+                <i class="fa fa-search search-inner-icon" id="searchBtn"></i>
+            </div>
+        </div>
+
+
+        <div class="actions">
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
+            <i data-target="user-setting" class=" fa-solid fa-gear" id="hidewhen500px"></i>
+            <i data-target="" class="fa-regular fa-bell"></i>
+            <span class="status">Online</span>
+            <img src="../../scr/images/profile-user (1).png" alt="User" class="avatar">
+            <!-- avatar pop up -->
+            <div class="profile-popup" id="profilePopup">
+                <div class="profile-popup-inside">
+                    <div class="profile-head">
+                        <img src="../../scr/images/profile-user.png" alt="Avatar" class="profile-avatar" />
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div id="user-role" class="profile-badge"></div>
+                    <div id="user-name" class="profile-name"></div>
+                    <div class="profile-meta">
+                        <!-- <span>@john</span>
+                            <span>·</span> -->
+                        <span id="joined-date">Joined Apr 2019</span>
+                        <span>·</span>
+                        <span class="active">Active now</span>
+                    </div>
+                </div>
+                <div data-target="user-profile" class="popup-customize"><i class="fi fi-bs-pencil"></i>Customize profile
+                </div>
+                <div data-target="user-password" class="popup-customize"><i class="fi fi-rs-key"></i>Change Password
+                </div>
+                <div class="line"></div>
+                <div class="logout" onclick="logoutUser()">
+                    <i class="fi fi-rc-exit"></i>
+                    Logout
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Home -->
+        <div class="section container">
+            <div class="menu-content">
+                <div data-target="client-request" class="box-click box request-box"><i
+                        class="fa-solid fa-file-circle-check"></i>
+                    Requests</div>
+                <!-- <div class="box-click box message-box"><i class="fa-solid fa-envelope"></i> Message</div> -->
+                <!-- <div class="cox-click box notice-box"><i class="fa-solid fa-bullhorn"></i> Notice</div> -->
+                <div data-target="all-members" class="box-click box member-box"><i class="fa-solid fa-users"></i>
+                    Members
+                </div>
+                <div data-target="new-admin" class="box-click box newAdmin-box"><i class="fa-solid fa-user-plus"></i>
+                    New
+                    Admin</div>
+                <!-- try using this onclick="settingsOpen()" and remove data-target="user-setting" and class="box-click" from below line -->
+                <div data-target="user-setting" class="box-click box setting-box"><i class="fa-solid fa-gear"></i>
+                    Settings</div>
+            </div>
+
+            <div class="personal-content" style="display: none;">
+                <div data-target="user-profile" class="box-click box box2 profile-box"><i class="fa-solid fa-user"></i>
+                    Profile
+                </div>
+                <div data-target="user-password" class="box-click box box2 password-box"><i
+                        class="fa-solid fa-lock"></i>
+                    Password
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Request Section -->
+        <section class="section client-request" style="display:none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="request-table" role="region" tabindex="0">
+                <p class="all-heads">BOOKING REQUESTS</p>
+                <div class="voucher-table-container" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Ticket No</th>
+                                <!-- <th>History</th> -->
+                                <th>Request</th>
+                                <!-- <th>Notice</th> -->
+                            </tr>
+                        </thead>
+                        <tbody id="booking-requests-body">
+                            <tr>
+                                <!-- <td>#A2451</td>
+                            <td>2025-06-14</td> -->
+                                <!-- <td><button class="history-btn"><i class="fa-solid fa-book"></i></button></td> -->
+                                <!--also add this field also -->
+                                <!-- <td>
+                                <button class="btn-accept">Accept</button>
+                                <button class="btn-decline">Decline</button>
+                            </td> -->
+                                <!-- <td>
+                            <button class="notice-btn"><i class="fa fa-paper-plane"></i> Send Notice</button> </td> -->
+                                <!--also add this field also -->
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+        </section>
+
+        <!-- New Admin Section -->
+        <section class="section new-admin" style="display: none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="register-container">
+                <div class="title">Registration</div>
+                <form id="admin-form" action="#">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name-admin" placeholder="Enter your name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email-admin" placeholder="Enter your email" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone-admin" placeholder="Enter your number" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password-admin" placeholder="Enter your password" required />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm Password</label>
+                            <input type="password" id="confirm-password-admin" placeholder="Confirm your password"
+                                required />
+                        </div>
+                        <div class="form-group gender">
+                            <label>Gender</label>
+                            <div class="gender-options">
+                                <label><input type="radio" name="gender" value="male" required> Male</label>
+                                <label><input type="radio" name="gender" value="female"> Female</label>
+                                <label><input type="radio" name="gender" value="none"> Prefer not to say</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <button type="submit">Register</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Settings -->
+        <section class="section user-setting" style="display:none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="user-setting-inner">
+                <div class="user-setting-grid">
+                    <div data-target="user-profile" class="grid-item"><i class="fa-solid fa-user"></i>Profile</div>
+                    <div data-target="user-password" class="grid-item"><i class="fa-solid fa-lock"></i>Password</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Members -->
+        <section class="section all-members" style="display:none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="user-setting-grid">
+                <div data-target="all-admins" class="grid-item "><i class="fi fi-ss-customer-service"></i>Admins</div>
+                <div data-target="all-customers" class="grid-item "><i class="fi fi-sr-user-bag"></i>Customers</div>
+            </div>
+        </section>
+        <!-- admin-subsection -->
+        <section class="section all-admins" style="display:none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="request-table" role="region" tabindex="0">
+                <p class="all-heads">ADMINS</p>
+                <div class="voucher-table-container" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Admin Name</th>
+                                <th>Date Registered</th>
+                                <th>Total Bookings</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admins-table-body">
+                            <tr>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+        </section>
+        <!-- customer-subsection -->
+        <section class="section all-customers" style="display:none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div class="request-table" role="region" tabindex="0">
+                <p class="all-heads">CUSTOMERS</p>
+                <div class="voucher-table-container" style="overflow-x: auto;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Customer Name</th>
+                                <th>Date Registered</th>
+                                <th>Total Bookings</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customers-table-body">
+                            <tr>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+        </section>
+
+        <!-- Personal Information -->
+        <section class="section user-profile" style="display: none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <h1 class="all-heads">My Profile</h1>
+            <div class="profile_card user-card">
+                <img src="../../scr/images/profile-user.png" class="profile-pic" />
+                <div class="user-info">
+                    <h3 id="full-name" class="profile_hcolor"></h3>
+                    <p id="profile-role"></p>
+                    <!-- <p><span id="profile-city"></span>, <span id="profile-country"></span></p> -->
+                    <p id="user-uid"></p>
+                </div>
+            </div>
+
+            <div class="profile_card ">
+                <div class="profile-header">
+                    <h3 class="profile_hcolor">Personal Information</h3>
+                    <button class="edit-btn" onclick="openModal(); testWrite();">Edit ✎</button>
+                </div>
+                <hr>
+                <div class="info-grid">
+                    <div><strong>Name</strong>
+                        <p id="first-name"></p>
+                    </div>
+                    <!-- <div><strong>Last Name</strong>
+                            <p id="last-name"></p>
+                        </div> -->
+                    <div><strong>Date of Birth</strong>
+                        <p id="dob"></p>
+                    </div>
+                    <div><strong>Email Address</strong>
+                        <p id="email"></p>
+                    </div>
+                    <div><strong>Phone Number</strong>
+                        <p id="phone"></p>
+                    </div>
+                    <div><strong>Role</strong>
+                        <p id="role"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile_card ">
+                <div class="profile-header">
+                    <h3 class="profile_hcolor">Address</h3>
+                    <button class="edit-btn" onclick="openAddressModal(); testWrite();">Edit ✎</button>
+                </div>
+                <hr>
+                <div class="info-grid">
+                    <div><strong>Country</strong>
+                        <p id="country"></p>
+                    </div>
+                    <div><strong>City</strong>
+                        <p id="city"></p>
+                    </div>
+                    <div><strong>Postal Code</strong>
+                        <p id="postal"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal-overlay" id="editModal1">
+                <div class="modal">
+                    <button class="close-btn" onclick="closeModal()">×</button>
+                    <h2>Edit Personal Information</h2>
+                    <form>
+                        <div class="row">
+                            <div>
+                                <label>Name</label>
+                                <input type="text" id="edit-name" placeholder="Full Name">
+                            </div>
+                            <!-- <div>
+                                    <label>Last Name</label>
+                                    <input defaultValue={userData?.LastName} />
+                                </div> -->
+                        </div>
+
+                        <div class="form-layout">
+                            <label>Email Address</label>
+                            <input type="email" id="edit-email" placeholder="Email">
+                        </div>
+
+                        <div class="form-layout">
+                            <label>Phone Number</label>
+                            <input type="text" id="edit-phone" placeholder="Phone">
+                        </div>
+
+                        <div class="form-layout">
+                            <label>Date of Birth</label>
+                            <input type="text" id="edit-dob" placeholder="D. o. b.">
+                        </div>
+
+                        <div class="form-layout">
+                            <label>User Role</label>
+                            <select disabled>
+                                <option>Admin</option>
+                            </select>
+                        </div>
+
+                        <div class="actions">
+                            <button class="save-btn" onclick="saveProfileChanges()">Save
+                                Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Modal2 -->
+            <div class="modal-overlay" id="addressModal">
+                <div class="modal">
+                    <button class="close-btn" onclick="closeAddressModal()">×</button>
+                    <h2>Edit Address</h2>
+                    <form>
+                        <div class="form-layout">
+                            <label>Country</label>
+                            <input type="text" id="edit-country" placeholder="Your Country">
+                        </div>
+                        <div class="form-layout">
+                            <label>City</label>
+                            <input type="text" id="edit-city" placeholder="Your City">
+                        </div>
+                        <div class="form-layout">
+                            <label>Postal Code</label>
+                            <input type="text" id="edit-postal" placeholder="Postal code">
+                        </div>
+                        <div class="actions">
+                            <button class="save-btn" onclick="saveProfileChanges()">Save
+                                Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Password Change Section -->
+        <section class="section user-password" style="display: none;">
+            <!-- Back Button -->
+            <div class="back-button">
+                <button onclick="history.back()">← Back</button>
+            </div>
+            <div id="password-change-section" class="password-wrapper">
+                <h2>Change your password</h2>
+
+                <div class="form-section">
+                    <div class="left-form">
+                        <label for="new-password">New Password</label>
+                        <div class="input-icon">
+                            <input type="password" id="new-password" />
+                            <!-- <span id="pass-valid" class="check-icon">✔</span> -->
+                        </div>
+
+                        <label for="confirm-password">Confirm New Password</label>
+                        <div class="input-icon">
+                            <input type="password" id="confirm-password" />
+                            <!-- <span id="confirm-valid" class="check-icon">✔</span> -->
+                        </div>
+                        <p id="match-msg" class="match-text">Passwords match</p>
+
+                        <button id="change-btn" onclick="showSuccess()">Change my password</button>
+                    </div>
+
+                    <div class="right-rules">
+                        <strong>Password Suggestion:</strong>
+                        <ul>
+                            <li id="rule-uppercase" class="valid">At least 1 upper case letter (A-Z)</li>
+                            <li id="rule-number" class="valid">At least 1 number (0-9)</li>
+                            <li id="rule-length" class="valid">At least 6 characters</li>
+                            <li id="rule-symbol" class="valid">Special characters (!,@,....)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Password Success Section -->
+            <div id="password-success-section" class="success-card">
+                <div class="success-check">✔</div>
+                <h2>Password updated!</h2>
+                <p>Your password has been changed successfully!<br>
+                    Use your new password to <a href="#">login</a>
+                </p>
+            </div>
+        </section>
+
+
+
+
+
+    </main>
+
+    <script src="../../scr/js/admin/admin-dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 60 },
+                color: { value: "#ffffff" },
+                shape: { type: "circle" },
+                opacity: { value: 0.3 },
+                size: { value: 3 },
+                move: { enable: true, speed: 1 }
+            },
+            interactivity: {
+                events: {
+                    onhover: { enable: true, mode: "repulse" }
+                },
+                modes: {
+                    repulse: { distance: 100 }
+                }
+            },
+            background: {
+                color: "#0d47a1"
+            }
+        });
+
+    </script>
+
+    <script type="module">
+        // admin-dashboard.js
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updatePassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+        import { EmailAuthProvider, reauthenticateWithCredential } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+        import { signOut } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+        import {
+            getFirestore, doc, getDoc, updateDoc, collection, getDocs,
+            query, orderBy, onSnapshot, where, setDoc, serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-firestore.js";
+        import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-auth.js";
+
+
+
+        import { firebaseConfig } from "../../firebase-config.js";
+
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // // Prevent back navigation
+        // window.history.pushState(null, "", window.location.href);
+        // window.onpopstate = function () {
+        //     window.history.pushState(null, "", window.location.href);
+        // };
+
+        // // Check login status
+        // const uid = localStorage.getItem("userId");
+        // if (!uid) {
+        //     // If no session, redirect to login
+        //     window.location.href = "admin-login.html";
+        // }
+
+        //----------------logout -----------------
+        window.logoutUser = function () {
+            signOut(auth)
+                .then(() => {
+                    window.location.href = "./admin-login.html"; // or your login page
+                })
+                .catch((error) => {
+                    console.error("Error signing out:", error);
+                    alert("Failed to log out.");
+                });
+        };
+
+        onAuthStateChanged(auth, async (user) => {
+            if (!user) {
+                window.location.href = "admin-login.html";
+                return;
+            }
+
+            const uid = user.uid;
+            const docRef = doc(db, "registrations", uid);
+            const docSnap = await getDoc(docRef);
+
+            if (!docSnap.exists()) {
+                console.log("No user document found.");
+                return;
+            }
+
+            const data = docSnap.data();
+            const joinedEl = document.getElementById("joined-date");
+            if (data.createdAt?.toDate) {
+                const joinedDate = data.createdAt.toDate();
+                joinedEl.textContent = `Joined ${joinedDate.toLocaleString('default', { month: 'short', year: 'numeric' })}`;
+            } else {
+                joinedEl.textContent = "Joined (date unknown)";
+            }
+
+            // Load bookings only if admin
+            if (data.role === "Admin") {
+                loadBookingRequests(); // 🎯
+            }
+
+            // Call this after onAuthStateChanged success.  for fetching the data in admin table and customers table in members section
+            loadUsersWithBookings().catch(console.error);
+
+            // Populate profile display
+            document.getElementById("user-name").textContent = data.name || "";
+            document.getElementById("user-role").textContent = data.role || "";
+            document.getElementById("full-name").textContent = data.name || "";
+            document.getElementById("profile-role").textContent = data.role || "";
+            // document.getElementById("profile-city").textContent = data.city || "";
+            // document.getElementById("profile-country").textContent = data.country || "";
+            document.getElementById("user-uid").textContent = data.uid || "";
+
+
+            document.getElementById("first-name").textContent = data.name || "";
+            document.getElementById("email").textContent = data.email || "";
+            document.getElementById("dob").textContent = data.dob || "";
+            document.getElementById("phone").textContent = data.phone || "";
+            document.getElementById("role").textContent = data.role || "";
+            document.getElementById("country").textContent = data.country || "";
+            document.getElementById("city").textContent = data.city || "";
+            document.getElementById("postal").textContent = data.postal || "";
+
+            // Populate edit form inputs
+            document.getElementById("edit-name").value = data.name || "";
+            document.getElementById("edit-email").value = data.email || "";
+            document.getElementById("edit-phone").value = data.phone || "";
+            document.getElementById("edit-dob").value = data.dob || "";
+            document.getElementById("edit-country").value = data.country || "";
+            document.getElementById("edit-city").value = data.city || "";
+            document.getElementById("edit-postal").value = data.postal || "";
+        });
+
+        //Save profile changes
+        window.saveProfileChanges = async function () {
+
+            console.log("Save button triggered");
+
+            // const user = auth.currentUser;
+            if (!auth.currentUser) {
+                console.error("No authenticated user.");
+                return;
+            }
+
+            console.log("auth.currentUser:", auth.currentUser);
+
+            const updatedData = {
+                name: document.getElementById("edit-name")?.value || "",
+                email: document.getElementById("edit-email")?.value || "",
+                phone: document.getElementById("edit-phone")?.value || "",
+                dob: document.getElementById("edit-dob")?.value || "",
+                country: document.getElementById("edit-country")?.value || "",
+                city: document.getElementById("edit-city")?.value || "",
+                postal: document.getElementById("edit-postal")?.value || "",
+            };
+
+            console.log("Updated data:", updatedData);
+
+            const userRef = doc(db, "registrations", auth.currentUser.uid);
+
+            try {
+                await setDoc(userRef, updatedData, { merge: true });
+                alert("Profile updated successfully.");
+            } catch (error) {
+                console.error("Error updating profile:", error);
+            }
+        };
+        window.testWrite = async () => {
+            if (!auth.currentUser) {
+                alert("Not logged in");
+                return;
+            }
+
+            const userRef = doc(db, "registrations", auth.currentUser.uid);
+
+            try {
+                await setDoc(userRef, { test: "write" }, { merge: true });
+                // alert("Write success!");
+                //closing both the edit modals 
+                // closeModal();
+                // closeAddressModal();
+            } catch (e) {
+                alert("Some Problem Occured at Site. Can't Edit Your Information");
+                console.error("Error updating profile:", JSON.stringify(error));
+            }
+        };
+
+        // ===================Initially show password form===================
+        document.getElementById("password-change-section").style.display = "block";
+
+        const newPassword = document.getElementById("new-password");
+        const confirmPassword = document.getElementById("confirm-password");
+        const matchMsg = document.getElementById("match-msg");
+        const passwordSuccess = document.getElementById("password-success-section");
+        const passwordChange = document.getElementById("password-change-section");
+
+        // When "Change my password" is clicked
+        window.showSuccess = async function () {
+            if (newPassword.value.length >= 6 && newPassword.value === confirmPassword.value) {
+                validatePassword();
+                const user = auth.currentUser;
+
+                if (user) {
+                    const email = user.email;
+                    const currentPassword = prompt("Enter current password to confirm:");
+                    const credential = EmailAuthProvider.credential(email, currentPassword);
+
+                    try {
+                        await reauthenticateWithCredential(user, credential);
+                        await updatePassword(user, newPassword.value);
+                        passwordChange.style.display = "none";
+                        passwordSuccess.style.display = "block";
+                    } catch (error) {
+                        alert("Error updating password: " + error.message);
+                    }
+                } else {
+                    alert("No user is currently signed in.");
+                }
+            } else if (newPassword.value.length < 6) {
+                alert("Password length must be at least 6 characters.");
+            } else {
+                alert("Passwords do not match.");
+            }
+        }
+
+        // Password Validation and Change
+        function validatePassword() {
+            const password = newPassword.value;
+            const confirm = confirmPassword.value;
+            const match = password && confirm && password === confirm;
+            matchMsg.textContent = match ? "Passwords match" : "Passwords do not match";
+            matchMsg.style.color = match ? "green" : "red";
+        }
+
+        newPassword.addEventListener("input", validatePassword);
+        confirmPassword.addEventListener("input", validatePassword);
+
+
+        // =======================booking requests ======================
+
+        // Fetch and display all booking requests
+        async function loadBookingRequests() {
+            console.log("Fetching booking requests...");
+
+            const tbody = document.getElementById("booking-requests-body");
+            tbody.innerHTML = "<tr><td colspan='3'>Loading...</td></tr>";
+
+            const bookingsRef = collection(db, "bookings");
+            const q = query(bookingsRef, orderBy("bookingDate", "desc")); // most recent first
+
+            onSnapshot(q, (snapshot) => {
+                if (snapshot.empty) {
+                    tbody.innerHTML = "<tr><td colspan='3'>No booking requests found.</td></tr>";
+                    return;
+                }
+
+                tbody.innerHTML = "";
+
+                snapshot.forEach(bookingDoc => {
+                    const data = bookingDoc.data();
+                    const docId = bookingDoc.id; // Firestore document ID
+                    const ticket = data.ticketNo || "-";
+                    const date = data.bookingDate?.toDate().toLocaleDateString("en-GB") || "-";
+
+                    const tr = document.createElement("tr");
+                    let actionCellHTML = "";
+
+                    if (!data.request || data.request.trim() === "") {
+                        // If request is empty, show buttons
+                        actionCellHTML = `
+        <button class="btn-accept">Accept</button>
+        <button class="btn-decline">Decline</button>
+    `;
+                    } else if (!data.request || data.request.trim() === "Accepted") {
+                        actionCellHTML = `<span class="action-cell-green">${data.request}</span>`;
+                    } else {
+                        // Otherwise, show the current request value
+                        actionCellHTML = `<span class="action-cell-red">${data.request}</span>`;
+                    }
+
+                    tr.innerHTML = `
+    <td>${date}</td>
+    <td>${ticket}</td>
+    <td class="action-cell">${actionCellHTML}</td>
+`;
+
+
+                    // Add event listeners after creating the row
+                    const acceptBtn = tr.querySelector(".btn-accept");
+                    const declineBtn = tr.querySelector(".btn-decline");
+
+                    if (acceptBtn && declineBtn) {
+                        acceptBtn.addEventListener("click", async () => {
+                            try {
+                                await updateDoc(doc(db, "bookings", docId), {
+                                    status: "Delivered",
+                                    request: "Accepted"
+                                });
+                                alert(`Booking ${ticket} marked as Delivered.`);
+                            } catch (err) {
+                                console.error("Failed to update booking:", err.message);
+                                alert("Error updating booking.");
+                            }
+                        });
+
+                        declineBtn.addEventListener("click", async () => {
+                            try {
+                                await updateDoc(doc(db, "bookings", docId), {
+                                    status: "Booking Canceled",
+                                    request: "Rejected"
+                                });
+                                alert(`Booking ${ticket} marked as Canceled.`);
+                            } catch (err) {
+                                console.error("Failed to update booking:", err);
+                                alert("Error updating booking.");
+                            }
+                        });
+                    }
+
+
+                    tbody.appendChild(tr);
+                });
+            });
+        }
+
+
+
+        // ================================for new admin registration ===================================
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector("#admin-form");
+            if (!form) {
+                console.error("Admin form not found.");
+                return;
+            }
+            form.addEventListener("submit", async (e) => {
+                e.preventDefault();
+
+                // Get form values
+                const name = document.getElementById("name-admin").value.trim();
+                const email = document.getElementById("email-admin").value.trim();
+                const phone = document.getElementById("phone-admin").value.trim();
+                const password = document.getElementById("password-admin").value;
+                const confirmPassword = document.getElementById("confirm-password-admin").value;
+                const gender = document.querySelector("input[name='gender']:checked")?.value;
+                const role = "Admin";
+                const dob = "--/--/----";
+                const country = "-";
+                const city = "-";
+                const postal = "-";
+
+                // Generate unique bookID and ensure it doesn't already exist
+                let bookID;
+                let isUnique = false;
+
+                while (!isUnique) {
+                    const candidateID = crypto.randomUUID();
+                    const q = query(collection(db, "registrations"), where("bookID", "==", candidateID));
+                    const snapshot = await getDocs(q);
+                    if (snapshot.empty) {
+                        bookID = candidateID;
+                        isUnique = true;
+                    }
+                }
+
+                // Basic validations
+                if (!gender) {
+                    alert("Please select a gender.");
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    alert("Passwords do not match.");
+                    return;
+                }
+
+                try {
+                    // Check for duplicate phone number in Firestore
+                    const usersRef = collection(db, "registrations");
+
+                    // Check for duplicate phone
+                    const phoneQuery = query(usersRef, where("phone", "==", phone));
+                    const phoneSnapshot = await getDocs(phoneQuery);
+
+                    // Check for duplicate email
+                    const emailQuery = query(usersRef, where("email", "==", email));
+                    const emailSnapshot = await getDocs(emailQuery);
+
+                    if (!phoneSnapshot.empty) {
+                        alert("User already exists with this phone number.");
+                        return;
+                    }
+
+                    if (!emailSnapshot.empty) {
+                        alert("User already exists with this email address.");
+                        return;
+                    }
+
+                    // Create user using Firebase Auth
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+
+                    // Store additional user info in Firestore using UID
+                    await setDoc(doc(db, "registrations", user.uid), {
+                        uid: user.uid,
+                        name,
+                        email,
+                        phone,
+                        gender,
+                        role,
+                        dob,
+                        country,
+                        city,
+                        postal,
+                        bookID,
+                        createdAt: serverTimestamp()
+                    });
+
+                    alert("Registration successful!");
+                    console.log("registration successful");
+                    window.location.href = "admin-dashboard.html";
+
+                } catch (error) {
+                    switch (error.code) {
+                        case "auth/email-already-in-use":
+                            alert("This email is already registered.");
+                            break;
+                        case "auth/invalid-email":
+                            alert("Please enter a valid email.");
+                            break;
+                        case "auth/weak-password":
+                            alert("Password must be at least 6 characters.");
+                            break;
+                        default:
+                            console.error("Unexpected error:", error);
+                            alert("Registration failed: " + error.message);
+                    }
+                }
+            });
+        });
+
+        //  ================ for fetching members  information into tables by checking their roles==============
+        async function loadUsersWithBookings() {
+            const registrationsRef = collection(db, "registrations");
+            const bookingsRef = collection(db, "bookings");
+
+            const registrationSnapshot = await getDocs(registrationsRef);
+            const allBookings = await getDocs(bookingsRef);
+
+            const adminTbody = document.querySelector(".all-admins tbody");
+            const customerTbody = document.querySelector(".all-customers tbody");
+
+            adminTbody.innerHTML = "";
+            customerTbody.innerHTML = "";
+
+            // Convert snapshot to array and sort by createdAt descending
+            const users = registrationSnapshot.docs
+                .map(doc => {
+                    const data = doc.data();
+                    return {
+                        uid: data.uid,
+                        name: data.name || "-",
+                        createdAt: data.createdAt?.toDate() || new Date(0),
+                        role: data.role
+                    };
+                })
+                .sort((a, b) => b.createdAt - a.createdAt); // Sort by date DESC
+
+            users.forEach(user => {
+                const bookingCount = allBookings.docs.filter(b => b.data().bookID === user.uid).length;
+
+                const row = document.createElement("tr");
+                row.innerHTML = `
+            <td>${user.uid}</td>
+            <td>${user.name}</td>
+            <td>${user.createdAt.toLocaleDateString()} ${user.createdAt.toLocaleTimeString()}</td>
+            <td>${bookingCount}</td>
+        `;
+
+                if (user.role === "Admin") {
+                    adminTbody.appendChild(row);
+                } else if (user.role === "Customer") {
+                    customerTbody.appendChild(row);
+                }
+            });
+        }
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
