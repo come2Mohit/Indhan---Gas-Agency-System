@@ -20,7 +20,7 @@ const logo = document.querySelector(".sidebar .logo");
 hamburger.addEventListener("click", () => {
 	sidebar.classList.toggle("show");
 	logo.innerHTML = sidebar.classList.contains("show")
-		? `&nbsp &nbsp &nbsp &nbsp;<img src="../../scr/images/Adobe Express - file.png"> Indhan`
+		? `&nbsp &nbsp &nbsp &nbsp;<img src="../../src/images/Adobe Express - file.png"> Indhan`
 		: "";
 });
 
